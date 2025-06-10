@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[   1233270,      21451]
-NotebookOptionsPosition[   1223443,      21286]
-NotebookOutlinePosition[   1223889,      21304]
-CellTagsIndexPosition[   1223846,      21301]
+NotebookDataLength[   1306539,      23169]
+NotebookOptionsPosition[   1293936,      22974]
+NotebookOutlinePosition[   1294382,      22992]
+CellTagsIndexPosition[   1294339,      22989]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -51,6 +51,1694 @@ Cell["Backward Induction Functions - Classical Setting", "Subsection",
   3.90151127796003*^9, 
   3.901511306583232*^9}},ExpressionUUID->"7cdb8a78-77d9-4571-948f-\
 11cb92331359"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Backward Induction Probability Functions - Quantum-Like Setting\
+\>", "Subsection",
+ CellChangeTimes->{{3.901470122252499*^9, 3.901470128058572*^9}, {
+  3.90151127796003*^9, 3.901511315398768*^9}, {3.901657395328186*^9, 
+  3.901657402908784*^9}},ExpressionUUID->"f5ec4c0d-4172-4ad0-b82f-\
+021bdacfeb4d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"for", " ", "debugging"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"U1SQ", "=", 
+    RowBox[{"-", "0.23801"}]}], ";", " ", 
+   RowBox[{"U1Acq2", "=", "1.025024"}], ";", " ", 
+   RowBox[{"U1Acq1", "=", 
+    RowBox[{"-", "1.36844"}]}], ";", 
+   RowBox[{"U1Nego", "=", 
+    RowBox[{"-", "1.10122"}]}], ";", " ", 
+   RowBox[{"U1War1", "=", 
+    RowBox[{"-", "1.51882"}]}], ";", " ", 
+   RowBox[{"U1War2", "=", 
+    RowBox[{"-", "1.963"}]}], ";", 
+   RowBox[{"U1Cap1", "=", 
+    RowBox[{"-", "2.25679"}]}], ";", " ", 
+   RowBox[{"U1Cap2", "=", "1.051597"}], ";", " ", 
+   RowBox[{"U2SQ", " ", "=", " ", 
+    RowBox[{"-", "0.57593"}]}], ";", " ", 
+   RowBox[{"U2Acq2", " ", "=", " ", 
+    RowBox[{"-", "1.51157"}]}], ";", " ", 
+   RowBox[{"U2Acq1", "=", "0.627684"}], ";", 
+   RowBox[{"U2Nego", "=", "0.591662"}], ";", " ", 
+   RowBox[{"U2War1", " ", "=", " ", "0.808828"}], ";", " ", 
+   RowBox[{"U2War2", "=", "0.817247"}], ";", 
+   RowBox[{"U2Cap1", "=", "0.861688"}], ";", " ", 
+   RowBox[{"U2Cap2", "=", 
+    RowBox[{"-", "1.52841"}]}], ";"}]}]], "Input",
+ CellLabel->
+  "In[250]:=",ExpressionUUID->"5528c019-77d8-4721-86fc-9e0cac84440e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"q10quantum", "[", 
+    RowBox[{"U2War1_", ",", "U2Cap2_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Sqrt", "[", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", "U2War1"], 
+      RowBox[{
+       SuperscriptBox["\[ExponentialE]", "U2War1"], "+", 
+       SuperscriptBox["\[ExponentialE]", "U2Cap2"]}]], "]"}], 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"\[ImaginaryI]", " ", 
+      RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}], " ", ";"}]], "Input",
+ CellChangeTimes->{{3.901511333824526*^9, 3.9015113409808292`*^9}, {
+  3.901511856232417*^9, 3.901511893565693*^9}, {3.9015138316869164`*^9, 
+  3.901513855269909*^9}, {3.9016727977301617`*^9, 3.901672799112*^9}, {
+  3.901675359966185*^9, 3.901675360821701*^9}, {3.901679977107869*^9, 
+  3.9016799895135927`*^9}},
+ CellLabel->
+  "In[251]:=",ExpressionUUID->"282d7f9d-b7e6-4f16-ad7a-149b6c2952a2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"notq10quantum", "[", 
+     RowBox[{"U2War1_", ",", "U2Cap2_"}], "]"}], ":=", "  ", 
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"1", "-", 
+       FractionBox[
+        SuperscriptBox["\[ExponentialE]", "U2War1"], 
+        RowBox[{
+         SuperscriptBox["\[ExponentialE]", "U2War1"], "+", 
+         SuperscriptBox["\[ExponentialE]", "U2Cap2"]}]]}], "]"}], 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"\[ImaginaryI]", " ", 
+       RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.901511333824526*^9, 3.9015113409808292`*^9}, {
+   3.9015114300331087`*^9, 3.901511449194669*^9}, {3.90151189079427*^9, 
+   3.9015118910430307`*^9}, {3.901513866451866*^9, 3.901513882724359*^9}, {
+   3.901672804183405*^9, 3.901672804984766*^9}, 3.90167537044594*^9},
+ CellLabel->
+  "In[252]:=",ExpressionUUID->"d5aac777-709b-488f-bad3-afc0d857739d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"q11quantum", "[", 
+     RowBox[{"U2War1_", ",", "U2Cap2_"}], "]"}], ":=", "  ", 
+    RowBox[{"q10quantum", "[", 
+     RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.901511482020814*^9, 3.901511497861676*^9}, {
+   3.90151201540578*^9, 3.9015120174035177`*^9}, {3.9015124875359488`*^9, 
+   3.901512489544825*^9}, {3.901515066247053*^9, 3.901515092925817*^9}, {
+   3.9016728095018272`*^9, 3.901672813102827*^9}, 3.901675374564024*^9},
+ CellLabel->
+  "In[253]:=",ExpressionUUID->"2425e3da-5bac-4baa-905a-443a168e4266"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"notq11quantum", "[", 
+     RowBox[{"U2War1_", ",", "U2Cap2_"}], "]"}], ":=", "  ", 
+    RowBox[{"notq10quantum", "[", 
+     RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.9015115180626497`*^9, 3.901511521581415*^9}, {
+   3.901512491273176*^9, 3.901512491538962*^9}, {3.9015150959468412`*^9, 
+   3.901515106512154*^9}, {3.9016728193624487`*^9, 3.90167282058142*^9}, 
+   3.901675377631851*^9},
+ CellLabel->
+  "In[254]:=",ExpressionUUID->"12e85a21-3e54-4fb2-a651-a6343213d661"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"p8quantum", "[", 
+     RowBox[{"U1War2_", ",", "U1Cap1_"}], "]"}], " ", ":=", "   ", 
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      FractionBox[
+       SuperscriptBox["\[ExponentialE]", "U1War2"], 
+       RowBox[{
+        SuperscriptBox["\[ExponentialE]", "U1War2"], "+", 
+        SuperscriptBox["\[ExponentialE]", "U1Cap1"]}]], "]"}], 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"\[ImaginaryI]", " ", 
+       RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.901511542440674*^9, 3.901511572009181*^9}, {
+   3.9015120210795527`*^9, 3.9015120802229223`*^9}, {3.90151512161382*^9, 
+   3.901515132164933*^9}, {3.9015153409444227`*^9, 3.901515356021474*^9}, {
+   3.9016728252424107`*^9, 3.901672826932279*^9}, 3.90167538044865*^9},
+ CellLabel->
+  "In[255]:=",ExpressionUUID->"d0a469ff-5337-440c-9f45-598bae0f59c3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"notp8quantum", "[", 
+     RowBox[{"U1War2_", ",", "U1Cap1_"}], "]"}], ":=", " ", 
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"1", "-", 
+       FractionBox[
+        SuperscriptBox["\[ExponentialE]", "U1War2"], 
+        RowBox[{
+         SuperscriptBox["\[ExponentialE]", "U1War2"], "+", 
+         SuperscriptBox["\[ExponentialE]", "U1Cap1"]}]]}], "]"}], 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"\[ImaginaryI]", " ", 
+       RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.901511581346987*^9, 3.901511637210607*^9}, {
+   3.9015124572785883`*^9, 3.9015124576605663`*^9}, {3.901515363949148*^9, 
+   3.901515380583283*^9}, {3.901672830456307*^9, 3.9016728314716873`*^9}, 
+   3.901675382587179*^9},
+ CellLabel->
+  "In[256]:=",ExpressionUUID->"353ebf34-e307-40d3-b89e-0fbf2725fa1e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"p12quantum", "[", 
+     RowBox[{"U1War2_", ",", "U1Cap1_"}], "]"}], ":=", " ", 
+    RowBox[{"p8quantum", "[", 
+     RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.901511655279128*^9, 3.901511673660119*^9}, {
+   3.9015124729517717`*^9, 3.901512473273651*^9}, {3.901515393757704*^9, 
+   3.901515408147607*^9}, 3.901651148526823*^9, {3.9016728369313183`*^9, 
+   3.901672837824595*^9}, 3.9016753845737953`*^9},
+ CellLabel->
+  "In[257]:=",ExpressionUUID->"6ef71b08-a537-4551-afa5-4350480908d9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"notp12quantum", "[", 
+     RowBox[{"U1War2_", ",", "U1Cap1_"}], "]"}], ":=", " ", 
+    RowBox[{"notp8quantum", "[", 
+     RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.901511683270462*^9, 3.901511686644044*^9}, {
+   3.9015124742817173`*^9, 3.901512474572671*^9}, {3.901515416167704*^9, 
+   3.901515417027462*^9}, {3.901515562123218*^9, 3.901515568155859*^9}, {
+   3.901672843769849*^9, 3.9016728446679707`*^9}, 3.901675386691807*^9},
+ CellLabel->
+  "In[258]:=",ExpressionUUID->"377ddf8a-1bfd-4764-b3e2-8243b58635cc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"q9quantum", "[", 
+     RowBox[{
+     "U1War2_", ",", "U1Cap1_", ",", "U2War2_", ",", "U2Cap1_", ",", " ", 
+      "U2Nego_"}], "]"}], ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"UP2N12", ",", "p12", ",", " ", "notp12"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"p12", "=", 
+        RowBox[{"p12quantum", "[", 
+         RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"notp12", "=", 
+        RowBox[{"notp12quantum", "[", 
+         RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"UP2N12", "=", " ", 
+        RowBox[{
+         RowBox[{"p12", " ", "U2War2"}], " ", "+", " ", 
+         RowBox[{"notp12", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+       " ", 
+       RowBox[{
+        RowBox[{"Sqrt", "[", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP2N12"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP2N12"], "+", 
+           SuperscriptBox["\[ExponentialE]", "U2Nego"]}]], "]"}], 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"\[ImaginaryI]", " ", 
+          RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "  "}]], "Input",
+ CellChangeTimes->{{3.9015117883559723`*^9, 3.901511812793359*^9}, {
+   3.901512119825737*^9, 3.901512357478326*^9}, {3.901512421073656*^9, 
+   3.901512441234185*^9}, {3.9015156605161753`*^9, 3.901515699254195*^9}, {
+   3.901515838793445*^9, 3.901515857374029*^9}, {3.901515910317766*^9, 
+   3.901515951529386*^9}, {3.9015159849679003`*^9, 3.901515990823851*^9}, {
+   3.901516032867878*^9, 3.9015160477379217`*^9}, 3.901675390393838*^9, 
+   3.901677122033684*^9},
+ CellLabel->
+  "In[259]:=",ExpressionUUID->"8fc38f53-9427-4ab4-a32d-2d49bc83a37d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"notq9quantum", "[", 
+     RowBox[{
+     "U1War2_", ",", "U1Cap1_", ",", "U2War2_", ",", "U2Cap1_", ",", " ", 
+      "U2Nego_"}], "]"}], ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"UP2N12", ",", "p12", ",", " ", "notp12"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"p12", "=", 
+        RowBox[{"p12quantum", "[", 
+         RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"notp12", "=", 
+        RowBox[{"notp12quantum", "[", 
+         RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"UP2N12", "=", " ", 
+        RowBox[{
+         RowBox[{"p12", " ", "U2War2"}], " ", "+", " ", 
+         RowBox[{"notp12", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+       " ", 
+       RowBox[{
+        RowBox[{"Sqrt", "[", 
+         RowBox[{"1", "-", 
+          FractionBox[
+           SuperscriptBox["\[ExponentialE]", "UP2N12"], 
+           RowBox[{
+            SuperscriptBox["\[ExponentialE]", "UP2N12"], "+", 
+            SuperscriptBox["\[ExponentialE]", "U2Nego"]}]]}], "]"}], 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"\[ImaginaryI]", " ", 
+          RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "  "}]], "Input",
+ CellChangeTimes->{{3.901512529857319*^9, 3.901512538579236*^9}, {
+   3.901516099152822*^9, 3.9015161422345343`*^9}, 3.901675393710362*^9, 
+   3.901677133040563*^9},
+ CellLabel->
+  "In[260]:=",ExpressionUUID->"aa3fc0ff-e9a0-44b0-86bf-fb84504cf019"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"p7quantum", "[", 
+    RowBox[{
+    "U1War1_", ",", "U1Cap2_", ",", "U2War1_", ",", "U2Cap2_", ",", 
+     "U1Nego_"}], "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"UP1N11", ",", " ", "q11", ",", " ", "notq11"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"q11", " ", "=", " ", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U1War1"}], "+", 
+        RowBox[{"notq11", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      "  ", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        FractionBox[
+         SuperscriptBox["\[ExponentialE]", "UP1N11"], 
+         RowBox[{
+          SuperscriptBox["\[ExponentialE]", "UP1N11"], "+", 
+          SuperscriptBox["\[ExponentialE]", "U1Nego"]}]], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901512573540577*^9, 3.901512771733448*^9}, {
+   3.901512843561438*^9, 3.901512869219098*^9}, {3.901516151007358*^9, 
+   3.901516152040371*^9}, {3.901516395721368*^9, 3.901516504610853*^9}, 
+   3.9016753967492933`*^9, 3.901677134823831*^9},
+ CellLabel->
+  "In[261]:=",ExpressionUUID->"8b4f8a3c-89ce-47a5-85ed-181fe989c87c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"notp7quantum", "[", 
+    RowBox[{
+    "U1War1_", ",", "U1Cap2_", ",", "U2War1_", ",", "U2Cap2_", ",", 
+     "U1Nego_"}], "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"UP1N11", ",", " ", "q11", ",", " ", "notq11"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"q11", " ", "=", " ", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U1War1"}], "+", 
+        RowBox[{"notq11", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      "  ", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP1N11"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP1N11"], "+", 
+           SuperscriptBox["\[ExponentialE]", "U1Nego"]}]]}], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.9015128999981117`*^9, 3.9015129041907177`*^9}, {
+   3.901516550176104*^9, 3.901516560772442*^9}, 3.901675399566244*^9, 
+   3.901677136039877*^9},
+ CellLabel->
+  "In[262]:=",ExpressionUUID->"e842497d-4c1a-4042-87e4-72b728226e6e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"q6quantum", "[", 
+    RowBox[{
+    "U1War1_", ",", " ", "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", 
+     "U2War2_", ",", "U2Cap1_", ",", "U2War1_", ",", "U2Cap2_", ",", 
+     "U1Nego_", ",", "U2Nego_"}], "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP2N8", ",", "U2N11", ",", " ", "UP2N7", ",", " ", "p8", ",", "notp8", 
+       ",", "p7", ",", "notp7", ",", "q11", ",", "notq11"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", "=", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U2War2"}], "+", 
+        RowBox[{"notp8", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"U2N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U2War1"}], "+", 
+        RowBox[{"notq11", " ", "U2Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "U2N11"}], "+", 
+        RowBox[{"notp7", " ", "U2Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      "  ", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        FractionBox[
+         SuperscriptBox["\[ExponentialE]", "UP2N8"], 
+         RowBox[{
+          SuperscriptBox["\[ExponentialE]", "UP2N8"], "+", 
+          SuperscriptBox["\[ExponentialE]", "UP2N7"]}]], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901513057389142*^9, 3.901513058934113*^9}, {
+   3.901513153834709*^9, 3.901513365535326*^9}, {3.901513515679847*^9, 
+   3.9015135192891827`*^9}, {3.9015137547254066`*^9, 3.9015137617003*^9}, {
+   3.901516618386791*^9, 3.90151667850282*^9}, {3.901516717667575*^9, 
+   3.9015168621440287`*^9}, {3.9015169362746058`*^9, 3.901516946484757*^9}, {
+   3.901516993145319*^9, 3.901517047831107*^9}, {3.9015170922542686`*^9, 
+   3.9015172193944063`*^9}, 3.901675403816636*^9, 3.901677137423356*^9, {
+   3.90167773700523*^9, 3.9016777588605433`*^9}, {3.901677802572167*^9, 
+   3.90167788370944*^9}, {3.9016779383936443`*^9, 3.9016779391569157`*^9}},
+ CellLabel->
+  "In[263]:=",ExpressionUUID->"3acee694-6afd-46c1-ba4b-762e688788ea"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"notq6quantum", "[", 
+    RowBox[{
+    "U1War1_", ",", " ", "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", 
+     "U2War2_", ",", "U2Cap1_", ",", "U2War1_", ",", "U2Cap2_", ",", 
+     "U1Nego_", ",", "U2Nego_"}], "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP2N8", ",", "U2N11", ",", " ", "UP2N7", ",", " ", "p8", ",", "notp8", 
+       ",", "p7", ",", "notp7", ",", "q11", ",", "notq11"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", "=", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U2War2"}], "+", 
+        RowBox[{"notp8", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"U2N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U2War1"}], "+", 
+        RowBox[{"notq11", " ", "U2Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "U2N11"}], "+", 
+        RowBox[{"notp7", " ", "U2Nego"}]}]}], ";", "\[IndentingNewLine]", " ", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP2N8"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP2N8"], "+", 
+           SuperscriptBox["\[ExponentialE]", "UP2N7"]}]]}], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901517250174244*^9, 3.9015172548573303`*^9}, {
+   3.901675408587274*^9, 3.901675414075388*^9}, 3.901677139452031*^9, {
+   3.901677904742795*^9, 3.901677929801209*^9}},
+ CellLabel->
+  "In[264]:=",ExpressionUUID->"1c529bba-1108-4cb9-8c95-21d82c0e9b16"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9016786924189367`*^9, 3.9016786927278852`*^9}, 
+   3.9016788297499332`*^9},
+ CellLabel->
+  "In[265]:=",ExpressionUUID->"fefe9d3c-de6f-4e04-80dd-9f710b9c1d4d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"p5quantum", "[", 
+    RowBox[{
+    "U1Cap1_", ",", "U2Cap1_", ",", "U1Cap2_", ",", "U2Cap2_", ",", "U1War1_",
+      ",", "U2War1_", ",", "U1War2_", ",", "U2War2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP1N10", ",", "UP2N10", ",", "UP2N9", ",", "UP1N9", ",", "q10", ",", 
+       "notq10", ",", "q9", ",", "notq9", ",", "p12", ",", "notp12", ",", 
+       "UP1N12"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p12", "=", 
+       RowBox[{"p12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp12", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N12", "=", 
+       RowBox[{
+        RowBox[{"p12", " ", "U1War2"}], " ", "+", " ", 
+        RowBox[{"notp12", " ", "U1Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"q10", "=", 
+       RowBox[{"q10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq10", "=", 
+       RowBox[{"notq10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q9", "=", 
+       RowBox[{"q9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq9", "=", 
+       RowBox[{"notq9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N10", "=", 
+       RowBox[{
+        RowBox[{"q10", " ", "U1War1"}], "+", 
+        RowBox[{"notq10", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N9", "=", 
+       RowBox[{
+        RowBox[{"q9", " ", "UP1N12"}], "+", 
+        RowBox[{"notq9", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", " ", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        FractionBox[
+         SuperscriptBox["\[ExponentialE]", "UP1N10"], 
+         RowBox[{
+          SuperscriptBox["\[ExponentialE]", "UP1N10"], "+", 
+          SuperscriptBox["\[ExponentialE]", "UP1N9"]}]], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901517475455933*^9, 3.901517551611047*^9}, 
+   3.9015348365042553`*^9, {3.901650503891457*^9, 3.901650508742868*^9}, {
+   3.901650603559013*^9, 3.901650795401497*^9}, {3.901651075843836*^9, 
+   3.901651393670023*^9}, {3.901651424299226*^9, 3.90165177057078*^9}, {
+   3.901651805378587*^9, 3.9016518730617857`*^9}, {3.901675418122514*^9, 
+   3.901675419256804*^9}, 3.901677140831341*^9},
+ CellLabel->
+  "In[266]:=",ExpressionUUID->"7b33bae1-0aa7-4e70-a66f-b11a0e5914c7"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.901678702145769*^9, 3.901678757990798*^9}},
+ CellLabel->
+  "In[267]:=",ExpressionUUID->"7d80159e-2b6e-442a-919a-e4bc4eac40b4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"notp5quantum", "[", 
+    RowBox[{
+    "U1Cap1_", ",", "U2Cap1_", ",", "U1Cap2_", ",", "U2Cap2_", ",", "U1War1_",
+      ",", "U2War1_", ",", "U1War2_", ",", "U2War2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP1N10", ",", "UP2N10", ",", "UP2N9", ",", "UP1N9", ",", "q10", ",", 
+       "notq10", ",", "q9", ",", "notq9", ",", "p12", ",", "notp12", ",", 
+       "UP1N12"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p12", "=", 
+       RowBox[{"p12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp12", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N12", "=", 
+       RowBox[{
+        RowBox[{"p12", " ", "U1War2"}], " ", "+", " ", 
+        RowBox[{"notp12", " ", "U1Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"q10", "=", 
+       RowBox[{"q10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq10", "=", 
+       RowBox[{"notq10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q9", "=", 
+       RowBox[{"q9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq9", "=", 
+       RowBox[{"notq9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N10", "=", 
+       RowBox[{
+        RowBox[{"q10", " ", "U1War1"}], "+", 
+        RowBox[{"notq10", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N9", "=", 
+       RowBox[{
+        RowBox[{"q9", " ", "UP1N12"}], "+", 
+        RowBox[{"notq9", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP1N10"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP1N10"], "+", 
+           SuperscriptBox["\[ExponentialE]", "UP1N9"]}]]}], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901651884622148*^9, 3.9016518912782583`*^9}, {
+   3.901675422443172*^9, 3.901675423595207*^9}, 3.90167714333722*^9},
+ CellLabel->
+  "In[268]:=",ExpressionUUID->"9dcc5277-f38e-473b-b743-c0f4f88aed2b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"p4quantum", "[", 
+    RowBox[{
+    "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", "U2War2_", ",", "U2Cap1_",
+      ",", "U1War1_", ",", "U2War1_", ",", "U2Cap2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U1Acq1_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP1N6", ",", "q11", ",", "notq11", ",", "p8", ",", "notp8", ",", "p7", 
+       ",", "notp7", ",", "q6", ",", "notq6", ",", "UP1N11", ",", "UP1N8", 
+       ",", "UP1N7"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", " ", "=", " ", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q6", "=", 
+       RowBox[{"q6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq6", "=", 
+       RowBox[{"notq6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U1War1"}], "+", 
+        RowBox[{"notq11", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U1War2"}], "+", 
+        RowBox[{"notp8", " ", "U1Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "UP1N11"}], "+", 
+        RowBox[{"notp7", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N6", "=", 
+       RowBox[{
+        RowBox[{"q6", " ", "UP1N8"}], "+", 
+        RowBox[{"notq6", " ", "UP1N7"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        FractionBox[
+         SuperscriptBox["\[ExponentialE]", "UP1N6"], 
+         RowBox[{
+          SuperscriptBox["\[ExponentialE]", "UP1N6"], "+", 
+          SuperscriptBox["\[ExponentialE]", "U1Acq1"]}]], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901651970347324*^9, 3.9016519807056*^9}, {
+   3.901652041681031*^9, 3.901652097822147*^9}, {3.9016521355766897`*^9, 
+   3.901652294977846*^9}, {3.901652328402317*^9, 3.901652350250105*^9}, {
+   3.901652418464872*^9, 3.901652559684063*^9}, {3.901652592495493*^9, 
+   3.901652662797076*^9}, {3.9016731238443317`*^9, 3.901673124504463*^9}, {
+   3.901675428080484*^9, 3.9016754294484863`*^9}, 3.901677145126108*^9, {
+   3.901678837959873*^9, 3.901678867876156*^9}},
+ CellLabel->
+  "In[269]:=",ExpressionUUID->"5bd46bcf-3ee2-4f29-8875-332118b4baba"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"notp4quantum", "[", 
+    RowBox[{
+    "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", "U2War2_", ",", "U2Cap1_",
+      ",", "U1War1_", ",", "U2War1_", ",", "U2Cap2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U1Acq1_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP1N6", ",", "q11", ",", "notq11", ",", "p8", ",", "notp8", ",", "p7", 
+       ",", "notp7", ",", "q6", ",", "notq6", ",", "UP1N11", ",", "UP1N8", 
+       ",", "UP1N7"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", " ", "=", " ", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q6", "=", 
+       RowBox[{"q6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq6", "=", 
+       RowBox[{"notq6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U1War1"}], "+", 
+        RowBox[{"notq11", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U1War2"}], "+", 
+        RowBox[{"notp8", " ", "U1Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "UP1N11"}], "+", 
+        RowBox[{"notp7", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N6", "=", 
+       RowBox[{
+        RowBox[{"q6", " ", "UP1N8"}], "+", 
+        RowBox[{"notq6", " ", "UP1N7"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP1N6"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP1N6"], "+", 
+           SuperscriptBox["\[ExponentialE]", "U1Acq1"]}]]}], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901652682435252*^9, 3.901652689709099*^9}, {
+   3.901673128503562*^9, 3.9016731293712893`*^9}, {3.901675433836053*^9, 
+   3.9016754350391073`*^9}, 3.901677147203575*^9, 3.9016788753258543`*^9},
+ CellLabel->
+  "In[270]:=",ExpressionUUID->"f72e57ac-cc46-4f81-8feb-25c394345e91"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"q3quantum", "[", 
+    RowBox[{
+    "U1Cap1_", ",", "U2Cap1_", ",", "U1Cap2_", ",", "U2Cap2_", ",", "U1War1_",
+      ",", "U2War1_", ",", "U1War2_", ",", "U2War2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U2Acq2_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP2N12", ",", "UP2N10", ",", "UP2N9", ",", "UP2N5", ",", "p12", ",", 
+       "notp12", ",", "q10", ",", "notq10", ",", "q9", ",", "notq9", ",", 
+       "p5", ",", "notp5"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p12", "=", 
+       RowBox[{"p12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp12", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP2N12", "=", 
+       RowBox[{
+        RowBox[{"p12", " ", "U2War2"}], " ", "+", " ", 
+        RowBox[{"notp12", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q10", "=", 
+       RowBox[{"q10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq10", "=", 
+       RowBox[{"notq10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP2N10", "=", 
+       RowBox[{
+        RowBox[{"q10", " ", "U2War1"}], "+", 
+        RowBox[{"notq10", " ", "U2Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q9", "=", 
+       RowBox[{"q9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq9", "=", 
+       RowBox[{"notq9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N9", "=", 
+       RowBox[{
+        RowBox[{"q9", " ", "UP2N12"}], "+", 
+        RowBox[{"notq9", " ", "U2Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p5", "=", 
+       RowBox[{"p5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp5", "=", 
+       RowBox[{"notp5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N5", "=", 
+       RowBox[{
+        RowBox[{"p5", " ", "UP2N10"}], "+", 
+        RowBox[{"notp5", " ", "UP2N9"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        FractionBox[
+         SuperscriptBox["\[ExponentialE]", "UP2N5"], 
+         RowBox[{
+          SuperscriptBox["\[ExponentialE]", "UP2N5"], "+", 
+          SuperscriptBox["\[ExponentialE]", "U2Acq2"]}]], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901652706220643*^9, 3.901653028972814*^9}, {
+   3.901653472990053*^9, 3.901653583324629*^9}, {3.90167543940311*^9, 
+   3.901675440715993*^9}, 3.9016771496380043`*^9},
+ CellLabel->
+  "In[271]:=",ExpressionUUID->"a4893442-6d29-4165-b052-95c6e7375c48"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"notq3quantum", "[", 
+    RowBox[{
+    "U1Cap1_", ",", "U2Cap1_", ",", "U1Cap2_", ",", "U2Cap2_", ",", "U1War1_",
+      ",", "U2War1_", ",", "U1War2_", ",", "U2War2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U2Acq2_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP2N12", ",", "UP2N10", ",", "UP2N9", ",", "UP2N5", ",", "p12", ",", 
+       "notp12", ",", "q10", ",", "notq10", ",", "q9", ",", "notq9", ",", 
+       "p5", ",", "notp5"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p12", "=", 
+       RowBox[{"p12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp12", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP2N12", "=", 
+       RowBox[{
+        RowBox[{"p12", " ", "U2War2"}], " ", "+", " ", 
+        RowBox[{"notp12", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q10", "=", 
+       RowBox[{"q10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq10", "=", 
+       RowBox[{"notq10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP2N10", "=", 
+       RowBox[{
+        RowBox[{"q10", " ", "U2War1"}], "+", 
+        RowBox[{"notq10", " ", "U2Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q9", "=", 
+       RowBox[{"q9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq9", "=", 
+       RowBox[{"notq9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N9", "=", 
+       RowBox[{
+        RowBox[{"q9", " ", "UP2N12"}], "+", 
+        RowBox[{"notq9", " ", "U2Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p5", "=", 
+       RowBox[{"p5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp5", "=", 
+       RowBox[{"notp5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N5", "=", 
+       RowBox[{
+        RowBox[{"p5", " ", "UP2N10"}], "+", 
+        RowBox[{"notp5", " ", "UP2N9"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP2N5"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP2N5"], "+", 
+           SuperscriptBox["\[ExponentialE]", "U2Acq2"]}]]}], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901653598118671*^9, 3.9016536049918957`*^9}, {
+   3.901675444735243*^9, 3.9016754461031923`*^9}, 3.901677151669498*^9},
+ CellLabel->
+  "In[272]:=",ExpressionUUID->"ac1d72f2-9617-497e-8a96-5eb2b424716e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"q2quantum", "[", 
+    RowBox[{
+    "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", "U2War2_", ",", "U2Cap1_",
+      ",", "U1War1_", ",", "U2War1_", ",", "U2Cap2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U1Acq1_", ",", "U2Acq1_", ",", "U2SQ_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP2N4", ",", "q11", ",", "notq11", ",", "p7", ",", "notp7", ",", "p8", 
+       ",", "notp8", ",", "q6", ",", "notq6", ",", "p4", ",", "notp4", ",", 
+       "UP2N11", ",", "UP2N7", ",", "UP2N8", ",", "UP2N6"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", "=", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"q6", "=", 
+       RowBox[{"q6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq6", "=", 
+       RowBox[{"notq6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p4", "=", 
+       RowBox[{"p4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp4", "=", 
+       RowBox[{"notp4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP2N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U2War1"}], "+", 
+        RowBox[{"notq11", " ", "U2Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "UP2N11"}], "+", 
+        RowBox[{"notp7", " ", "U2Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U2War2"}], "+", 
+        RowBox[{"notp8", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N6", "=", " ", 
+       RowBox[{
+        RowBox[{"q6", " ", "UP2N8"}], "+", 
+        RowBox[{"notq6", " ", "UP2N7"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N4", "=", 
+       RowBox[{
+        RowBox[{"p4", " ", "UP2N6"}], "+", 
+        RowBox[{"notp4", " ", "U2Acq1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        FractionBox[
+         SuperscriptBox["\[ExponentialE]", "UP2N4"], 
+         RowBox[{
+          SuperscriptBox["\[ExponentialE]", "UP2N4"], "+", 
+          SuperscriptBox["\[ExponentialE]", "U2SQ"]}]], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.90165362140023*^9, 3.901653638206925*^9}, {
+   3.901653669599785*^9, 3.901653953312189*^9}, {3.901654010295019*^9, 
+   3.901654203906885*^9}, {3.901675449607217*^9, 3.9016754511026497`*^9}, 
+   3.901677160043189*^9, 3.901678884657048*^9},
+ CellLabel->
+  "In[273]:=",ExpressionUUID->"4f05102c-5021-419a-aa3d-4692671ecd54"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"notq2quantum", "[", 
+    RowBox[{
+    "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", "U2War2_", ",", "U2Cap1_",
+      ",", "U1War1_", ",", "U2War1_", ",", "U2Cap2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U1Acq1_", ",", "U2Acq1_", ",", "U2SQ_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP2N4", ",", "q11", ",", "notq11", ",", "p7", ",", "notp7", ",", "p8", 
+       ",", "notp8", ",", "q6", ",", "notq6", ",", "p4", ",", "notp4", ",", 
+       "UP2N11", ",", "UP2N7", ",", "UP2N8", ",", "UP2N6"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", "=", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"q6", "=", 
+       RowBox[{"q6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq6", "=", 
+       RowBox[{"notq6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p4", "=", 
+       RowBox[{"p4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp4", "=", 
+       RowBox[{"notp4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP2N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U2War1"}], "+", 
+        RowBox[{"notq11", " ", "U2Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "UP2N11"}], "+", 
+        RowBox[{"notp7", " ", "U2Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U2War2"}], "+", 
+        RowBox[{"notp8", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N6", "=", " ", 
+       RowBox[{
+        RowBox[{"q6", " ", "UP2N8"}], "+", 
+        RowBox[{"notq6", " ", "UP2N7"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP2N4", "=", 
+       RowBox[{
+        RowBox[{"p4", " ", "UP2N6"}], "+", 
+        RowBox[{"notp4", " ", "U2Acq1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP2N4"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP2N4"], "+", 
+           SuperscriptBox["\[ExponentialE]", "U2SQ"]}]]}], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]2", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.901654219912568*^9, 3.9016542242759438`*^9}, {
+   3.901675455108212*^9, 3.901675456705433*^9}, 3.901677165879147*^9, 
+   3.9016788910720253`*^9},
+ CellLabel->
+  "In[274]:=",ExpressionUUID->"5b2a484a-833b-45e4-acd2-7dfcf5728ada"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"p1quantum", "[", 
+    RowBox[{
+    "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", "U2War2_", ",", "U2Cap1_",
+      ",", "U1War1_", ",", "U2War1_", ",", "U2Cap2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U1Acq1_", ",", "U2Acq1_", ",", "U1Acq2_", ",", 
+     "U2Acq2_", ",", "U1SQ_", ",", "U2SQ_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP1N2", ",", "UP1N3", ",", "UP1N4", ",", "UP1N5", ",", "UP1N6", ",", 
+       "UP1N9", ",", "UP1N10", ",", "UP1N12", ",", "q2", ",", "notq2", ",", 
+       "q3", ",", "notq3", ",", "p4", ",", "notp4", ",", "p5", ",", "notp5", 
+       ",", "q6", ",", "notq6", ",", "p8", ",", "notp8", ",", "p7", ",", 
+       "notp7", ",", "q9", ",", "notq9", ",", "q10", ",", "notq10", ",", 
+       "q11", ",", "notq11", ",", "p12", ",", "notp12", ",", " ", "UP1N11", 
+       ",", "UP1N7", ",", "UP1N8"}], "}"}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p12", "=", 
+       RowBox[{"p12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp12", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", "=", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"q10", "=", 
+       RowBox[{"q10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq10", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"q9", "=", 
+       RowBox[{"q9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq9", "=", 
+       RowBox[{"notq9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q6", "=", 
+       RowBox[{"q6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq6", "=", 
+       RowBox[{"notq6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p5", " ", "=", 
+       RowBox[{"p5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp5", "=", 
+       RowBox[{"notp5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p4", "=", 
+       RowBox[{"p4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp4", "=", 
+       RowBox[{"notp4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q3", "=", 
+       RowBox[{"q3quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U2Acq2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq3", "=", 
+       RowBox[{"notq3quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U2Acq2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q2", "=", 
+       RowBox[{"q2quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1", ",", "U2Acq1", ",", "U2SQ"}], "]"}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"notq2", "=", 
+       RowBox[{"notq2quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1", ",", "U2Acq1", ",", "U2SQ"}], "]"}]}], ";",
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"UP1N12", "=", 
+       RowBox[{
+        RowBox[{"p12", " ", "U1War1"}], "+", 
+        RowBox[{"notp12", " ", "U1Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U1War1"}], "+", 
+        RowBox[{"notq11", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N9", "=", 
+       RowBox[{
+        RowBox[{"q9", " ", "UP1N12"}], "+", 
+        RowBox[{"notq9", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "UP1N11"}], "+", 
+        RowBox[{"notp7", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U2War2"}], "+", 
+        RowBox[{"notp8", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N10", "=", 
+       RowBox[{
+        RowBox[{"q10", " ", "U1War1"}], "+", 
+        RowBox[{"notq10", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N6", "=", " ", 
+       RowBox[{
+        RowBox[{"q6", " ", "UP1N8"}], "+", 
+        RowBox[{"notq6", " ", "UP1N7"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N5", "=", 
+       RowBox[{
+        RowBox[{"p5", " ", "UP1N10"}], "+", 
+        RowBox[{"notp5", " ", "UP1N9"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N4", "=", 
+       RowBox[{
+        RowBox[{"p4", " ", "UP1N6"}], "+", 
+        RowBox[{"notp4", " ", "U1Acq1"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N3", "=", 
+       RowBox[{
+        RowBox[{"q3", " ", "UP1N5"}], "+", 
+        RowBox[{"notq3", " ", "U1Acq2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N2", "=", 
+       RowBox[{
+        RowBox[{"q2", " ", "UP1N4"}], "+", 
+        RowBox[{"notq2", " ", "U1SQ"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        FractionBox[
+         SuperscriptBox["\[ExponentialE]", "UP1N3"], 
+         RowBox[{
+          SuperscriptBox["\[ExponentialE]", "UP1N3"], "+", 
+          SuperscriptBox["\[ExponentialE]", "UP1N2"]}]], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.9016542464854813`*^9, 3.901654250259602*^9}, {
+   3.901655565057918*^9, 3.90165559448072*^9}, {3.901655645316235*^9, 
+   3.901655672113997*^9}, {3.901655733114188*^9, 3.9016557973910217`*^9}, {
+   3.901655865907544*^9, 3.901655878399287*^9}, {3.9016562830355*^9, 
+   3.901656288033803*^9}, {3.90165636453024*^9, 3.9016564069821157`*^9}, {
+   3.901656528885962*^9, 3.9016566603177013`*^9}, {3.901656837055163*^9, 
+   3.9016570147695417`*^9}, {3.901657055011766*^9, 3.901657158489284*^9}, {
+   3.9016572034629507`*^9, 3.901657376834671*^9}, {3.901675462203862*^9, 
+   3.9016754634200697`*^9}, 3.9016771697898283`*^9, {3.9016803014332533`*^9, 
+   3.901680461740574*^9}, {3.901680526184124*^9, 3.901680717568369*^9}, {
+   3.901681010130187*^9, 3.9016810181857557`*^9}, 3.901681115038797*^9},
+ CellLabel->
+  "In[275]:=",ExpressionUUID->"ad2b9da3-fbfb-4990-bbd1-b035d942c964"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"notp1quantum", "[", 
+    RowBox[{
+    "U1War2_", ",", "U1Cap1_", ",", "U1Cap2_", ",", "U2War2_", ",", "U2Cap1_",
+      ",", "U1War1_", ",", "U2War1_", ",", "U2Cap2_", ",", " ", "U1Nego_", 
+     ",", "U2Nego_", ",", "U1Acq1_", ",", "U2Acq1_", ",", "U1Acq2_", ",", 
+     "U2Acq2_", ",", "U1SQ_", ",", "U2SQ_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "UP1N2", ",", "UP1N3", ",", "UP1N4", ",", "UP1N5", ",", "UP1N6", ",", 
+       "UP1N9", ",", "UP1N10", ",", "UP1N12", ",", "q2", ",", "notq2", ",", 
+       "q3", ",", "notq3", ",", "p4", ",", "notp4", ",", "p5", ",", "notp5", 
+       ",", "q6", ",", "notq6", ",", "p8", ",", "notp8", ",", "p7", ",", 
+       "notp7", ",", "q9", ",", "notq9", ",", "q10", ",", "notq10", ",", 
+       "q11", ",", "notq11", ",", "p12", ",", "notp12", ",", " ", "UP1N11", 
+       ",", "UP1N7", ",", "UP1N8"}], "}"}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p12", "=", 
+       RowBox[{"p12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp12", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"q11", "=", 
+       RowBox[{"q11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq11", "=", 
+       RowBox[{"notq11quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"q10", "=", 
+       RowBox[{"q10quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notq10", "=", 
+       RowBox[{"notp12quantum", "[", 
+        RowBox[{"U2War1", ",", "U2Cap2"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p8", "=", 
+       RowBox[{"p8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"notp8", "=", 
+       RowBox[{"notp8quantum", "[", 
+        RowBox[{"U1War2", ",", "U1Cap1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q9", "=", 
+       RowBox[{"q9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq9", "=", 
+       RowBox[{"notq9quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U2War2", ",", "U2Cap1", ",", " ", 
+         "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p7", "=", 
+       RowBox[{"p7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp7", "=", 
+       RowBox[{"notp7quantum", "[", 
+        RowBox[{
+        "U1War1", ",", "U1Cap2", ",", "U2War1", ",", "U2Cap2", ",", 
+         "U1Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q6", "=", 
+       RowBox[{"q6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq6", "=", 
+       RowBox[{"notq6quantum", "[", 
+        RowBox[{
+        "U1War1", ",", " ", "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", 
+         "U2War2", ",", "U2Cap1", ",", "U2War1", ",", "U2Cap2", ",", "U1Nego",
+          ",", "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p5", " ", "=", 
+       RowBox[{"p5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp5", "=", 
+       RowBox[{"notp5quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"p4", "=", 
+       RowBox[{"p4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notp4", "=", 
+       RowBox[{"notp4quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q3", "=", 
+       RowBox[{"q3quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U2Acq2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"notq3", "=", 
+       RowBox[{"notq3quantum", "[", 
+        RowBox[{
+        "U1Cap1", ",", "U2Cap1", ",", "U1Cap2", ",", "U2Cap2", ",", "U1War1", 
+         ",", "U2War1", ",", "U1War2", ",", "U2War2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U2Acq2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"q2", "=", 
+       RowBox[{"q2quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1", ",", "U2Acq1", ",", "U2SQ"}], "]"}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"notq2", "=", 
+       RowBox[{"notq2quantum", "[", 
+        RowBox[{
+        "U1War2", ",", "U1Cap1", ",", "U1Cap2", ",", "U2War2", ",", "U2Cap1", 
+         ",", "U1War1", ",", "U2War1", ",", "U2Cap2", ",", " ", "U1Nego", ",",
+          "U2Nego", ",", "U1Acq1", ",", "U2Acq1", ",", "U2SQ"}], "]"}]}], ";",
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"UP1N12", "=", 
+       RowBox[{
+        RowBox[{"p12", " ", "U1War1"}], "+", 
+        RowBox[{"notp12", " ", "U1Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N11", "=", 
+       RowBox[{
+        RowBox[{"q11", " ", "U1War1"}], "+", 
+        RowBox[{"notq11", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N9", "=", 
+       RowBox[{
+        RowBox[{"q9", " ", "UP1N12"}], "+", 
+        RowBox[{"notq9", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N7", "=", 
+       RowBox[{
+        RowBox[{"p7", " ", "UP1N11"}], "+", 
+        RowBox[{"notp7", " ", "U1Nego"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N8", "=", 
+       RowBox[{
+        RowBox[{"p8", " ", "U2War2"}], "+", 
+        RowBox[{"notp8", " ", "U2Cap1"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N10", "=", 
+       RowBox[{
+        RowBox[{"q10", " ", "U1War1"}], "+", 
+        RowBox[{"notq10", " ", "U1Cap2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N6", "=", " ", 
+       RowBox[{
+        RowBox[{"q6", " ", "UP1N8"}], "+", 
+        RowBox[{"notq6", " ", "UP1N7"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N5", "=", 
+       RowBox[{
+        RowBox[{"p5", " ", "UP1N10"}], "+", 
+        RowBox[{"notp5", " ", "UP1N9"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N4", "=", 
+       RowBox[{
+        RowBox[{"p4", " ", "UP1N6"}], "+", 
+        RowBox[{"notp4", " ", "U1Acq1"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UP1N3", "=", 
+       RowBox[{
+        RowBox[{"q3", " ", "UP1N5"}], "+", 
+        RowBox[{"notq3", " ", "U1Acq2"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"UP1N2", "=", 
+       RowBox[{
+        RowBox[{"q2", " ", "UP1N4"}], "+", 
+        RowBox[{"notq2", " ", "U1SQ"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          SuperscriptBox["\[ExponentialE]", "UP1N3"], 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", "UP1N3"], "+", 
+           SuperscriptBox["\[ExponentialE]", "UP1N2"]}]]}], "]"}], 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"Re", "[", "\[Theta]1", "]"}]}]]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.9016575818195467`*^9, 3.9016575858781548`*^9}, {
+   3.9016754671664457`*^9, 3.9016754684200993`*^9}, 3.901677172527631*^9, {
+   3.901680736545265*^9, 3.901680747626809*^9}, {3.9016808199095993`*^9, 
+   3.901680991123693*^9}, {3.9016810937200937`*^9, 3.901681120084309*^9}},
+ CellLabel->
+  "In[276]:=",ExpressionUUID->"eb614e32-82a1-422b-bf94-8c9fd2df9867"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -21313,142 +23001,172 @@ Cell[CellGroupData[{
 Cell[1281, 43, 168, 3, 66, "Section",ExpressionUUID->"e4dcf874-0ea3-4ddc-8539-ab129ce0b9c0"],
 Cell[1452, 48, 244, 4, 53, "Subsection",ExpressionUUID->"7cdb8a78-77d9-4571-948f-11cb92331359"],
 Cell[CellGroupData[{
-Cell[1721, 56, 305, 5, 37, "Subsection",ExpressionUUID->"4ea952b6-ffa3-41fe-9545-bead82c16d11"],
-Cell[2029, 63, 2143, 42, 233, "Input",ExpressionUUID->"528f04ba-234c-4f57-85ee-1ceb933aaa35"],
-Cell[4175, 107, 2394, 50, 254, "Input",ExpressionUUID->"aa069b9b-64b1-4837-9b81-8fe0b4a46e06"],
-Cell[6572, 159, 1981, 41, 213, "Input",ExpressionUUID->"f9625f0a-93c4-417f-abe2-60c6dd65c54b"],
-Cell[8556, 202, 614, 12, 29, "Input",ExpressionUUID->"bb4473e7-7de0-4990-8e6a-bbc9fc1a30d0"],
-Cell[9173, 216, 751, 26, 29, "Input",ExpressionUUID->"acda598a-f2ad-43d9-98c3-3739c9ceb2c8"],
-Cell[9927, 244, 5181, 112, 478, "Input",ExpressionUUID->"7227878c-91b0-4e79-b66b-95d3427bdf39"],
-Cell[15111, 358, 945, 32, 29, "Input",ExpressionUUID->"6ac96cd0-10b7-43c6-8bf2-388e49a9261a"],
-Cell[16059, 392, 4834, 101, 560, "Input",ExpressionUUID->"95510082-c950-45f3-a05a-af0090a6ed4e"],
-Cell[20896, 495, 996, 33, 29, "Input",ExpressionUUID->"c11d0181-9367-47b0-915b-a0153e8e31d7"],
-Cell[21895, 530, 5780, 123, 723, "Input",ExpressionUUID->"a50e19b8-f4f2-427d-ad25-cd9dbb3df8c2"],
-Cell[27678, 655, 1047, 34, 29, "Input",ExpressionUUID->"ad3c0a99-1c0e-4e16-859a-21388bdbbf2d"],
-Cell[28728, 691, 5356, 114, 580, "Input",ExpressionUUID->"ec64f013-5d2c-40a8-adcb-47a5578c68cf"],
-Cell[34087, 807, 1092, 34, 29, "Input",ExpressionUUID->"87ad9c19-06c9-47f8-a3e2-40b88b8e0fc4"],
-Cell[35182, 843, 5623, 120, 662, "Input",ExpressionUUID->"e5c48b6a-eea3-4160-a11d-c0861f5dc6a1"]
+Cell[1721, 56, 313, 6, 37, "Subsection",ExpressionUUID->"f5ec4c0d-4172-4ad0-b82f-021bdacfeb4d"],
+Cell[2037, 64, 1213, 31, 151, "Input",ExpressionUUID->"5528c019-77d8-4721-86fc-9e0cac84440e"],
+Cell[3253, 97, 909, 21, 46, "Input",ExpressionUUID->"282d7f9d-b7e6-4f16-ad7a-149b6c2952a2"],
+Cell[4165, 120, 951, 22, 46, "Input",ExpressionUUID->"d5aac777-709b-488f-bad3-afc0d857739d"],
+Cell[5119, 144, 617, 13, 29, "Input",ExpressionUUID->"2425e3da-5bac-4baa-905a-443a168e4266"],
+Cell[5739, 159, 577, 13, 29, "Input",ExpressionUUID->"12e85a21-3e54-4fb2-a651-a6343213d661"],
+Cell[6319, 174, 923, 21, 46, "Input",ExpressionUUID->"d0a469ff-5337-440c-9f45-598bae0f59c3"],
+Cell[7245, 197, 905, 22, 46, "Input",ExpressionUUID->"353ebf34-e307-40d3-b89e-0fbf2725fa1e"],
+Cell[8153, 221, 592, 13, 29, "Input",ExpressionUUID->"6ef71b08-a537-4551-afa5-4350480908d9"],
+Cell[8748, 236, 620, 13, 29, "Input",ExpressionUUID->"377ddf8a-1bfd-4764-b3e2-8243b58635cc"],
+Cell[9371, 251, 1920, 46, 166, "Input",ExpressionUUID->"8fc38f53-9427-4ab4-a32d-2d49bc83a37d"],
+Cell[11294, 299, 1660, 43, 166, "Input",ExpressionUUID->"aa3fc0ff-e9a0-44b0-86bf-fb84504cf019"],
+Cell[12957, 344, 1660, 42, 166, "Input",ExpressionUUID->"8b4f8a3c-89ce-47a5-85ed-181fe989c87c"],
+Cell[14620, 388, 1603, 42, 166, "Input",ExpressionUUID->"e842497d-4c1a-4042-87e4-72b728226e6e"],
+Cell[16226, 432, 3275, 76, 288, "Input",ExpressionUUID->"3acee694-6afd-46c1-ba4b-762e688788ea"],
+Cell[19504, 510, 2833, 70, 288, "Input",ExpressionUUID->"1c529bba-1108-4cb9-8c95-21d82c0e9b16"],
+Cell[22340, 582, 207, 4, 29, "Input",ExpressionUUID->"fefe9d3c-de6f-4e04-80dd-9f710b9c1d4d"],
+Cell[22550, 588, 3066, 72, 309, "Input",ExpressionUUID->"7b33bae1-0aa7-4e70-a66f-b11a0e5914c7"],
+Cell[25619, 662, 175, 3, 29, "Input",ExpressionUUID->"7d80159e-2b6e-442a-919a-e4bc4eac40b4"],
+Cell[25797, 667, 2828, 69, 309, "Input",ExpressionUUID->"9dcc5277-f38e-473b-b743-c0f4f88aed2b"],
+Cell[28628, 738, 4006, 91, 452, "Input",ExpressionUUID->"5bd46bcf-3ee2-4f29-8875-332118b4baba"],
+Cell[32637, 831, 3775, 88, 452, "Input",ExpressionUUID->"f72e57ac-cc46-4f81-8feb-25c394345e91"],
+Cell[36415, 921, 3716, 88, 432, "Input",ExpressionUUID->"a4893442-6d29-4165-b052-95c6e7375c48"],
+Cell[40134, 1011, 3706, 88, 432, "Input",ExpressionUUID->"ac1d72f2-9617-497e-8a96-5eb2b424716e"],
+Cell[43843, 1101, 4671, 106, 534, "Input",ExpressionUUID->"4f05102c-5021-419a-aa3d-4692671ecd54"],
+Cell[48517, 1209, 4615, 106, 534, "Input",ExpressionUUID->"5b2a484a-833b-45e4-acd2-7dfcf5728ada"],
+Cell[53135, 1317, 9758, 213, 1106, "Input",ExpressionUUID->"ad2b9da3-fbfb-4990-bbd1-b035d942c964"],
+Cell[62896, 1532, 9281, 207, 1106, "Input",ExpressionUUID->"eb614e32-82a1-422b-bf94-8c9fd2df9867"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[40842, 968, 212, 4, 53, "Subsection",ExpressionUUID->"7647a9ed-5275-4452-9cb8-ffc5d6d0c11d"],
-Cell[41057, 974, 2336, 61, 70, "Input",ExpressionUUID->"84c178b2-eef3-4d26-8783-3a89f15c698f"]
+Cell[72214, 1744, 305, 5, 53, "Subsection",ExpressionUUID->"4ea952b6-ffa3-41fe-9545-bead82c16d11"],
+Cell[72522, 1751, 2143, 42, 233, "Input",ExpressionUUID->"528f04ba-234c-4f57-85ee-1ceb933aaa35"],
+Cell[74668, 1795, 2394, 50, 254, "Input",ExpressionUUID->"aa069b9b-64b1-4837-9b81-8fe0b4a46e06"],
+Cell[77065, 1847, 1981, 41, 213, "Input",ExpressionUUID->"f9625f0a-93c4-417f-abe2-60c6dd65c54b"],
+Cell[79049, 1890, 614, 12, 29, "Input",ExpressionUUID->"bb4473e7-7de0-4990-8e6a-bbc9fc1a30d0"],
+Cell[79666, 1904, 751, 26, 29, "Input",ExpressionUUID->"acda598a-f2ad-43d9-98c3-3739c9ceb2c8"],
+Cell[80420, 1932, 5181, 112, 478, "Input",ExpressionUUID->"7227878c-91b0-4e79-b66b-95d3427bdf39"],
+Cell[85604, 2046, 945, 32, 29, "Input",ExpressionUUID->"6ac96cd0-10b7-43c6-8bf2-388e49a9261a"],
+Cell[86552, 2080, 4834, 101, 560, "Input",ExpressionUUID->"95510082-c950-45f3-a05a-af0090a6ed4e"],
+Cell[91389, 2183, 996, 33, 29, "Input",ExpressionUUID->"c11d0181-9367-47b0-915b-a0153e8e31d7"],
+Cell[92388, 2218, 5780, 123, 723, "Input",ExpressionUUID->"a50e19b8-f4f2-427d-ad25-cd9dbb3df8c2"],
+Cell[98171, 2343, 1047, 34, 29, "Input",ExpressionUUID->"ad3c0a99-1c0e-4e16-859a-21388bdbbf2d"],
+Cell[99221, 2379, 5356, 114, 580, "Input",ExpressionUUID->"ec64f013-5d2c-40a8-adcb-47a5578c68cf"],
+Cell[104580, 2495, 1092, 34, 29, "Input",ExpressionUUID->"87ad9c19-06c9-47f8-a3e2-40b88b8e0fc4"],
+Cell[105675, 2531, 5623, 120, 662, "Input",ExpressionUUID->"e5c48b6a-eea3-4160-a11d-c0861f5dc6a1"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43430, 1040, 159, 3, 53, "Subsection",ExpressionUUID->"b276b0f2-9662-4fe2-a718-3f95a19f24ce"],
-Cell[43592, 1045, 438, 10, 29, "Input",ExpressionUUID->"3f7df504-128a-49c6-92d5-660e843d7a82"],
-Cell[CellGroupData[{
-Cell[44055, 1059, 330, 8, 29, "Input",ExpressionUUID->"43ad1cc2-f8b9-4491-874f-95f8a01b52eb"],
-Cell[44388, 1069, 434, 7, 33, "Output",ExpressionUUID->"0a14da8b-503f-4116-9bad-c7d6dc2b8f62"]
+Cell[111335, 2656, 212, 4, 53, "Subsection",ExpressionUUID->"7647a9ed-5275-4452-9cb8-ffc5d6d0c11d"],
+Cell[111550, 2662, 2336, 61, 70, "Input",ExpressionUUID->"84c178b2-eef3-4d26-8783-3a89f15c698f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[44859, 1081, 266, 6, 29, "Input",ExpressionUUID->"8ecea35a-34b7-4644-a6be-e4c6fe9a6459"],
-Cell[45128, 1089, 430, 7, 33, "Output",ExpressionUUID->"6cdecbf8-2d14-4229-8093-94f7709449cc"]
+Cell[113923, 2728, 159, 3, 53, "Subsection",ExpressionUUID->"b276b0f2-9662-4fe2-a718-3f95a19f24ce"],
+Cell[114085, 2733, 438, 10, 29, "Input",ExpressionUUID->"3f7df504-128a-49c6-92d5-660e843d7a82"],
+Cell[CellGroupData[{
+Cell[114548, 2747, 330, 8, 29, "Input",ExpressionUUID->"43ad1cc2-f8b9-4491-874f-95f8a01b52eb"],
+Cell[114881, 2757, 434, 7, 33, "Output",ExpressionUUID->"0a14da8b-503f-4116-9bad-c7d6dc2b8f62"]
 }, Open  ]],
-Cell[45573, 1099, 175, 4, 29, "Input",ExpressionUUID->"db608aaf-034c-4f5f-86a0-af69049d9614"],
-Cell[45751, 1105, 268, 7, 49, "Input",ExpressionUUID->"a63ff31e-5ba4-4da3-9fcc-0e057b8ab786"],
-Cell[46022, 1114, 245, 5, 29, "Input",ExpressionUUID->"382cf960-ef2a-4426-a1ee-31a3331231f3"],
 Cell[CellGroupData[{
-Cell[46292, 1123, 9144, 225, 907, "Input",ExpressionUUID->"eb1cdca3-b6ce-4ae9-8058-f3b9009ffc4f"],
+Cell[115352, 2769, 266, 6, 29, "Input",ExpressionUUID->"8ecea35a-34b7-4644-a6be-e4c6fe9a6459"],
+Cell[115621, 2777, 430, 7, 33, "Output",ExpressionUUID->"6cdecbf8-2d14-4229-8093-94f7709449cc"]
+}, Open  ]],
+Cell[116066, 2787, 175, 4, 29, "Input",ExpressionUUID->"db608aaf-034c-4f5f-86a0-af69049d9614"],
+Cell[116244, 2793, 268, 7, 49, "Input",ExpressionUUID->"a63ff31e-5ba4-4da3-9fcc-0e057b8ab786"],
+Cell[116515, 2802, 245, 5, 29, "Input",ExpressionUUID->"382cf960-ef2a-4426-a1ee-31a3331231f3"],
 Cell[CellGroupData[{
-Cell[55461, 1352, 500, 11, 23, "Print",ExpressionUUID->"6839c9fe-c0f3-4ec7-8016-d868b2714354"],
-Cell[55964, 1365, 399, 9, 23, "Print",ExpressionUUID->"3f3b80aa-4c33-416b-8969-f8464f2cf18d"],
-Cell[56366, 1376, 278, 5, 23, "Print",ExpressionUUID->"e0a67908-b943-4f85-a4b9-8c645e6ef6e2"]
+Cell[116785, 2811, 9144, 225, 907, "Input",ExpressionUUID->"eb1cdca3-b6ce-4ae9-8058-f3b9009ffc4f"],
+Cell[CellGroupData[{
+Cell[125954, 3040, 500, 11, 23, "Print",ExpressionUUID->"6839c9fe-c0f3-4ec7-8016-d868b2714354"],
+Cell[126457, 3053, 399, 9, 23, "Print",ExpressionUUID->"3f3b80aa-4c33-416b-8969-f8464f2cf18d"],
+Cell[126859, 3064, 278, 5, 23, "Print",ExpressionUUID->"e0a67908-b943-4f85-a4b9-8c645e6ef6e2"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[56693, 1387, 2419, 67, 192, "Input",ExpressionUUID->"ed38a1a3-8004-4d63-b0ff-aac2f5234570"],
-Cell[59115, 1456, 277, 5, 23, "Print",ExpressionUUID->"f07340d8-5578-4dfd-8726-facb270007f4"]
+Cell[127186, 3075, 2419, 67, 192, "Input",ExpressionUUID->"ed38a1a3-8004-4d63-b0ff-aac2f5234570"],
+Cell[129608, 3144, 277, 5, 23, "Print",ExpressionUUID->"f07340d8-5578-4dfd-8726-facb270007f4"]
 }, Open  ]],
-Cell[59407, 1464, 170, 3, 49, "Input",ExpressionUUID->"197b9174-77b7-4fba-b0fe-c10dc1bfd174"],
+Cell[129900, 3152, 170, 3, 49, "Input",ExpressionUUID->"197b9174-77b7-4fba-b0fe-c10dc1bfd174"],
 Cell[CellGroupData[{
-Cell[59602, 1471, 742, 13, 29, "Input",ExpressionUUID->"491fb41b-55e3-4ac6-96a4-1499c8cc669f"],
-Cell[60347, 1486, 190742, 3146, 393, "Output",ExpressionUUID->"edd9a09e-79bb-40e3-803d-e0c86df69726"]
+Cell[130095, 3159, 742, 13, 29, "Input",ExpressionUUID->"491fb41b-55e3-4ac6-96a4-1499c8cc669f"],
+Cell[130840, 3174, 190742, 3146, 393, "Output",ExpressionUUID->"edd9a09e-79bb-40e3-803d-e0c86df69726"]
 }, Open  ]],
-Cell[251104, 4635, 152, 3, 29, "Input",ExpressionUUID->"b0bc0a83-e22f-4f32-bfd0-32f76fafad6a"],
+Cell[321597, 6323, 152, 3, 29, "Input",ExpressionUUID->"b0bc0a83-e22f-4f32-bfd0-32f76fafad6a"],
 Cell[CellGroupData[{
-Cell[251281, 4642, 320, 7, 29, "Input",ExpressionUUID->"4e303c77-6d26-4a19-bcd8-9a9392078e85"],
-Cell[251604, 4651, 120470, 2009, 522, "Output",ExpressionUUID->"970f3cb0-2478-41c0-8128-0d3354a546cc"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[372111, 6665, 322, 7, 29, "Input",ExpressionUUID->"aced6326-d0ef-43df-9a54-7fac9665819c"],
-Cell[372436, 6674, 153620, 2543, 419, "Output",ExpressionUUID->"64d4aa62-23b4-4eda-88d2-487105a9b880"]
+Cell[321774, 6330, 320, 7, 29, "Input",ExpressionUUID->"4e303c77-6d26-4a19-bcd8-9a9392078e85"],
+Cell[322097, 6339, 120470, 2009, 522, "Output",ExpressionUUID->"970f3cb0-2478-41c0-8128-0d3354a546cc"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[526093, 9222, 322, 7, 29, "Input",ExpressionUUID->"d6b76c5b-c170-4b07-ac00-183077c3c420"],
-Cell[526418, 9231, 109137, 1826, 410, "Output",ExpressionUUID->"f4f46bc9-ef58-490d-ad47-65edf7830a1c"]
+Cell[442604, 8353, 322, 7, 29, "Input",ExpressionUUID->"aced6326-d0ef-43df-9a54-7fac9665819c"],
+Cell[442929, 8362, 153620, 2543, 419, "Output",ExpressionUUID->"64d4aa62-23b4-4eda-88d2-487105a9b880"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[635592, 11062, 322, 7, 29, "Input",ExpressionUUID->"ac3860bc-d247-487c-9b80-35931c33dcb7"],
-Cell[635917, 11071, 100776, 1693, 425, "Output",ExpressionUUID->"2dcd8534-0105-4d69-b82c-419e112f1239"]
+Cell[596586, 10910, 322, 7, 29, "Input",ExpressionUUID->"d6b76c5b-c170-4b07-ac00-183077c3c420"],
+Cell[596911, 10919, 109137, 1826, 410, "Output",ExpressionUUID->"f4f46bc9-ef58-490d-ad47-65edf7830a1c"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[736730, 12769, 322, 7, 29, "Input",ExpressionUUID->"7ec6f596-22d1-4140-bcac-5a562b2cc549"],
-Cell[737055, 12778, 129510, 2154, 368, "Output",ExpressionUUID->"213824a2-64cb-4a09-a92f-580975141921"]
+Cell[706085, 12750, 322, 7, 29, "Input",ExpressionUUID->"ac3860bc-d247-487c-9b80-35931c33dcb7"],
+Cell[706410, 12759, 100776, 1693, 425, "Output",ExpressionUUID->"2dcd8534-0105-4d69-b82c-419e112f1239"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[866602, 14937, 318, 7, 29, "Input",ExpressionUUID->"f3ca9d00-7789-4726-b779-f1a199cfc469"],
-Cell[866923, 14946, 140109, 2326, 407, "Output",ExpressionUUID->"973f7fd1-aacb-4dfb-9603-551a42c46afe"]
+Cell[807223, 14457, 322, 7, 29, "Input",ExpressionUUID->"7ec6f596-22d1-4140-bcac-5a562b2cc549"],
+Cell[807548, 14466, 129510, 2154, 368, "Output",ExpressionUUID->"213824a2-64cb-4a09-a92f-580975141921"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1007069, 17277, 320, 7, 29, "Input",ExpressionUUID->"44be9bd6-48aa-4551-9900-fd8d699f2b8c"],
-Cell[1007392, 17286, 139711, 2320, 375, "Output",ExpressionUUID->"da277d2b-267d-419a-9659-d9e457b21391"]
+Cell[937095, 16625, 318, 7, 29, "Input",ExpressionUUID->"f3ca9d00-7789-4726-b779-f1a199cfc469"],
+Cell[937416, 16634, 140109, 2326, 407, "Output",ExpressionUUID->"973f7fd1-aacb-4dfb-9603-551a42c46afe"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1147140, 19611, 1916, 40, 70, "Input",ExpressionUUID->"839a3d2b-af5a-43af-a5b3-4375b76f3d61"],
-Cell[1149059, 19653, 744, 14, 44, "Message",ExpressionUUID->"19e697a2-be02-419a-9e87-f3d0473b995d"],
-Cell[1149806, 19669, 744, 14, 44, "Message",ExpressionUUID->"053558a3-bd69-49a5-81d4-aab644aadb44"],
-Cell[1150553, 19685, 741, 14, 44, "Message",ExpressionUUID->"e7429dc0-a4a2-4756-9fa4-8a7846dda360"],
-Cell[1151297, 19701, 530, 11, 26, "Message",ExpressionUUID->"e1053139-a980-4559-931f-430a205a39b7"]
+Cell[1077562, 18965, 320, 7, 29, "Input",ExpressionUUID->"44be9bd6-48aa-4551-9900-fd8d699f2b8c"],
+Cell[1077885, 18974, 139711, 2320, 375, "Output",ExpressionUUID->"da277d2b-267d-419a-9659-d9e457b21391"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1151864, 19717, 178, 3, 29, "Input",ExpressionUUID->"8829a765-f76d-4080-8fd5-c0e159153b97"],
-Cell[1152045, 19722, 673, 13, 44, "Message",ExpressionUUID->"fd245eab-07bd-4d03-98c4-db185502379f"],
-Cell[1152721, 19737, 8868, 228, 87, "Output",ExpressionUUID->"c620be17-f947-4b2b-a901-d36de164e31f"]
+Cell[1217633, 21299, 1916, 40, 70, "Input",ExpressionUUID->"839a3d2b-af5a-43af-a5b3-4375b76f3d61"],
+Cell[1219552, 21341, 744, 14, 44, "Message",ExpressionUUID->"19e697a2-be02-419a-9e87-f3d0473b995d"],
+Cell[1220299, 21357, 744, 14, 44, "Message",ExpressionUUID->"053558a3-bd69-49a5-81d4-aab644aadb44"],
+Cell[1221046, 21373, 741, 14, 44, "Message",ExpressionUUID->"e7429dc0-a4a2-4756-9fa4-8a7846dda360"],
+Cell[1221790, 21389, 530, 11, 26, "Message",ExpressionUUID->"e1053139-a980-4559-931f-430a205a39b7"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1161626, 19970, 1422, 32, 70, "Input",ExpressionUUID->"31b4d9f6-5af9-4753-a959-89f5cc7b8b9a"],
-Cell[1163051, 20004, 1365, 37, 367, "Output",ExpressionUUID->"617ec7d8-b2aa-408d-a640-abfb2364d08e"]
+Cell[1222357, 21405, 178, 3, 29, "Input",ExpressionUUID->"8829a765-f76d-4080-8fd5-c0e159153b97"],
+Cell[1222538, 21410, 673, 13, 44, "Message",ExpressionUUID->"fd245eab-07bd-4d03-98c4-db185502379f"],
+Cell[1223214, 21425, 8868, 228, 87, "Output",ExpressionUUID->"c620be17-f947-4b2b-a901-d36de164e31f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1164453, 20046, 1372, 31, 70, "Input",ExpressionUUID->"693b4591-195d-4195-a116-5be2a85d4ebf"],
-Cell[1165828, 20079, 1293, 36, 367, "Output",ExpressionUUID->"01d44c16-5868-4fd4-95c7-8fc5ba400faa"]
+Cell[1232119, 21658, 1422, 32, 70, "Input",ExpressionUUID->"31b4d9f6-5af9-4753-a959-89f5cc7b8b9a"],
+Cell[1233544, 21692, 1365, 37, 367, "Output",ExpressionUUID->"617ec7d8-b2aa-408d-a640-abfb2364d08e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1167158, 20120, 1371, 31, 70, "Input",ExpressionUUID->"205a2901-2aec-44d5-9d16-32974beb7057"],
-Cell[1168532, 20153, 4939, 99, 374, "Output",ExpressionUUID->"e1117ffc-219f-418e-8e6e-25b615fce068"]
+Cell[1234946, 21734, 1372, 31, 70, "Input",ExpressionUUID->"693b4591-195d-4195-a116-5be2a85d4ebf"],
+Cell[1236321, 21767, 1293, 36, 367, "Output",ExpressionUUID->"01d44c16-5868-4fd4-95c7-8fc5ba400faa"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1173508, 20257, 1301, 29, 70, "Input",ExpressionUUID->"c293fbbf-9e86-46f7-94e0-c1b26a079195"],
-Cell[1174812, 20288, 9763, 181, 382, "Output",ExpressionUUID->"5755e8c8-b35d-4aca-a74c-9badba020a9c"]
+Cell[1237651, 21808, 1371, 31, 70, "Input",ExpressionUUID->"205a2901-2aec-44d5-9d16-32974beb7057"],
+Cell[1239025, 21841, 4939, 99, 374, "Output",ExpressionUUID->"e1117ffc-219f-418e-8e6e-25b615fce068"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1184612, 20474, 1380, 32, 70, "Input",ExpressionUUID->"9a2f81e2-12b4-4076-9aed-110f21958c90"],
-Cell[1185995, 20508, 1272, 36, 367, "Output",ExpressionUUID->"9fbfac05-63b7-4f43-8557-adbcc1ac5633"]
+Cell[1244001, 21945, 1301, 29, 70, "Input",ExpressionUUID->"c293fbbf-9e86-46f7-94e0-c1b26a079195"],
+Cell[1245305, 21976, 9763, 181, 382, "Output",ExpressionUUID->"5755e8c8-b35d-4aca-a74c-9badba020a9c"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1187304, 20549, 1310, 31, 70, "Input",ExpressionUUID->"1fdc8cc3-d9d9-4d99-8c85-c1391169b2d6"],
-Cell[1188617, 20582, 7911, 145, 382, "Output",ExpressionUUID->"45e93dc5-7f7c-4ff7-9fee-363c4e54b93f"]
+Cell[1255105, 22162, 1380, 32, 70, "Input",ExpressionUUID->"9a2f81e2-12b4-4076-9aed-110f21958c90"],
+Cell[1256488, 22196, 1272, 36, 367, "Output",ExpressionUUID->"9fbfac05-63b7-4f43-8557-adbcc1ac5633"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1196565, 20732, 1315, 31, 70, "Input",ExpressionUUID->"1377adae-4b11-4cd0-9614-64318ad3938b"],
-Cell[1197883, 20765, 8679, 158, 382, "Output",ExpressionUUID->"8431c082-d250-4853-8dda-a48e889c338f"]
+Cell[1257797, 22237, 1310, 31, 70, "Input",ExpressionUUID->"1fdc8cc3-d9d9-4d99-8c85-c1391169b2d6"],
+Cell[1259110, 22270, 7911, 145, 382, "Output",ExpressionUUID->"45e93dc5-7f7c-4ff7-9fee-363c4e54b93f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1206599, 20928, 1334, 31, 70, "Input",ExpressionUUID->"c961f0cd-6380-43f2-8f49-5f3d3b2494d7"],
-Cell[1207936, 20961, 11618, 211, 382, "Output",ExpressionUUID->"d1e22c5d-4279-4a42-980c-72f8b6d4b63d"]
-}, Open  ]],
-Cell[1219569, 21175, 372, 9, 29, "Input",ExpressionUUID->"0907245d-7443-4398-a229-c787d5268bc6"],
-Cell[CellGroupData[{
-Cell[1219966, 21188, 556, 13, 70, "Input",ExpressionUUID->"d9e3144c-eb0a-4f9f-b836-a3be94a9c810"],
-Cell[1220525, 21203, 475, 10, 33, "Output",ExpressionUUID->"10c90a6d-6439-40e4-b4f1-290c9fa84ead"]
+Cell[1267058, 22420, 1315, 31, 70, "Input",ExpressionUUID->"1377adae-4b11-4cd0-9614-64318ad3938b"],
+Cell[1268376, 22453, 8679, 158, 382, "Output",ExpressionUUID->"8431c082-d250-4853-8dda-a48e889c338f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1221037, 21218, 548, 13, 70, "Input",ExpressionUUID->"693cc7ef-0b91-4df2-aa8b-56ae010f220f"],
-Cell[1221588, 21233, 499, 11, 33, "Output",ExpressionUUID->"60972ee3-951f-497f-a15b-417e76796377"]
+Cell[1277092, 22616, 1334, 31, 70, "Input",ExpressionUUID->"c961f0cd-6380-43f2-8f49-5f3d3b2494d7"],
+Cell[1278429, 22649, 11618, 211, 382, "Output",ExpressionUUID->"d1e22c5d-4279-4a42-980c-72f8b6d4b63d"]
+}, Open  ]],
+Cell[1290062, 22863, 372, 9, 29, "Input",ExpressionUUID->"0907245d-7443-4398-a229-c787d5268bc6"],
+Cell[CellGroupData[{
+Cell[1290459, 22876, 556, 13, 70, "Input",ExpressionUUID->"d9e3144c-eb0a-4f9f-b836-a3be94a9c810"],
+Cell[1291018, 22891, 475, 10, 33, "Output",ExpressionUUID->"10c90a6d-6439-40e4-b4f1-290c9fa84ead"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1222124, 21249, 787, 19, 70, "Input",ExpressionUUID->"52b204fa-edb6-4025-9c2e-ea10cf2fa26a"],
-Cell[1222914, 21270, 477, 10, 33, "Output",ExpressionUUID->"8f1977d5-1418-4ab8-992e-a4fe5688b0b0"]
+Cell[1291530, 22906, 548, 13, 70, "Input",ExpressionUUID->"693cc7ef-0b91-4df2-aa8b-56ae010f220f"],
+Cell[1292081, 22921, 499, 11, 33, "Output",ExpressionUUID->"60972ee3-951f-497f-a15b-417e76796377"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1292617, 22937, 787, 19, 70, "Input",ExpressionUUID->"52b204fa-edb6-4025-9c2e-ea10cf2fa26a"],
+Cell[1293407, 22958, 477, 10, 33, "Output",ExpressionUUID->"8f1977d5-1418-4ab8-992e-a4fe5688b0b0"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
