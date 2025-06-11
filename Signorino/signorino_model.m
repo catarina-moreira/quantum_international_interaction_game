@@ -580,9 +580,10 @@ extractUtilities[data_, rowIndex_Integer] := Module[{row, utils},
 
 calculateOutcomes
 
-calculateOutcome[data_, rowIndex_Integer, l1_ : 1, l2_ : 1] := 
+calculateOutcome[data_, rowIndex_Integer, l1_ : 1, l2_ : 1] :=
  Module[{utils, outcomes, sqProb, acq1Prob, acq2Prob, negoProb, cap1Prob, 
-   cap2Prob, war1Prob, war2Prob},
+   cap2Prob, war1Prob, war2Prob, prediction, roundedProbs, outcomeProbs, 
+   maxVal, maxOutcomes},
   
   utils = extractUtilities[data, rowIndex];
   If[utils === $Failed,
@@ -661,11 +662,44 @@ calculateOutcome[data_, rowIndex_Integer, l1_ : 1, l2_ : 1] :=
      utils["U1Acq2"], utils["U2Acq2"], utils["U1SQ"], utils["U2SQ"], l1, 
      l2]];
   
-  outcomes = 
-   Association["SQ" -> sqProb, "ACQ1" -> acq1Prob, "ACQ2" -> acq2Prob, 
-    "NEGO" -> negoProb, "CAP1" -> cap1Prob, "CAP2" -> cap2Prob, 
-    "WAR1" -> war1Prob, "WAR2" -> war2Prob];
+  
+  (*Create outcomes association*)
+  outcomes =
+   Association[
+    "SQ" -> sqProb,
+    "ACQ1" -> acq1Prob,
+    "ACQ2" -> acq2Prob,
+    "NEGO" -> negoProb,
+    "CAP1" -> cap1Prob,
+    "CAP2" -> cap2Prob,
+    "WAR1" -> war1Prob,
+    "WAR2" -> war2Prob];
+  
+  (*Calculate prediction *)
+  outcomeProbs =
+   Association[
+    "SQ" -> sqProb,
+    "ACQ1" -> acq1Prob,
+    "ACQ2" -> acq2Prob,
+    "NEGO" -> negoProb,
+    "CAP1" -> cap1Prob,
+    "CAP2" -> cap2Prob,
+    "WAR1" -> war1Prob,
+    "WAR2" -> war2Prob];
+  
+  (*Round probabilities to 4 decimal places for comparison*)
+  roundedProbs = 
+   Association[# -> Round[outcomeProbs[#], 0.0001] & /@ Keys[outcomeProbs]];
+  
+  maxVal = Max[Values[roundedProbs]];
+  (*Get all outcomes that have the maximum probability (after rounding)*)
+  maxOutcomes = Keys[Select[roundedProbs, # == maxVal &]];
+  (*Randomly select one if there are ties*)
+  prediction = RandomChoice[maxOutcomes];
+  
+  (*Add all components to outcomes*)
   outcomes["groundtruth"] = utils["groundtruth"];
+  outcomes["prediction"] = prediction;
   outcomes["total"] = 
    Total[{sqProb, acq1Prob, acq2Prob, negoProb, cap1Prob, cap2Prob, war1Prob, 
      war2Prob}];
@@ -693,194 +727,53 @@ processDataset[data_, l1_ : 1, l2_ : 1] := Module[{results, i},
   results
   ]
 
-getPredictions
-
-getPredictions[data_, l1_ : 1, l2_ : 1] := 
- Module[{results, predictions, groundTruth, validResults, cleanPredictions, 
-   cleanGroundTruth, validIndices}, 
-  Print["Computing predictions for dataset..."];
-  results = processDataset[data, l1, l2];
-  If[Length[results] == 0,
-   Print["Error: No valid results computed"];
-   Return[$Failed]
-   ];
-  
-  (*Filter out failed results*)
-  validResults = Select[results, # =!= $Failed &];
-  
-  predictions =
-   Table[
-    Module[{probs, maxOutcome, outcomeProbs},
-     outcomeProbs =
-      Association["SQ" -> validResults[[i]]["SQ"],
-       "ACQ1" -> validResults[[i]]["ACQ1"],
-       "ACQ2" -> validResults[[i]]["ACQ2"],
-       "NEGO" -> validResults[[i]]["NEGO"],
-       "CAP1" -> validResults[[i]]["CAP1"],
-       "CAP2" -> validResults[[i]]["CAP2"],
-       "WAR1" -> validResults[[i]]["WAR1"],
-       "WAR2" -> validResults[[i]]["WAR2"]
-       ];
-     
-     (*Check for valid probabilities*)
-     If[AllTrue[Values[outcomeProbs], NumericQ],
-      maxOutcome = First[Keys[MaximalBy[outcomeProbs, Values]]];
-      maxOutcome,
-      "ERROR"]
-     ],
-    {i, Length[validResults]}
-    ];
-  
-  groundTruth = 
-   Table[validResults[[i]]["groundtruth"], {i, Length[validResults]}];
-  validIndices = Position[predictions, Except["ERROR"]] // Flatten;
-  cleanPredictions = predictions[[validIndices]];
-  cleanGroundTruth = groundTruth[[validIndices]];
-  Print["Valid predictions: ", Length[cleanPredictions], " out of ", 
-   Length[predictions]];
-  
-  Association[
-   "predictions" -> cleanPredictions,
-   "groundtruth" -> cleanGroundTruth,
-   "results" -> validResults,
-   "accuracy" -> 
-    If[Length[cleanPredictions] > 0, 
-     N[Count[MapThread[Equal, {cleanPredictions, cleanGroundTruth}], True]/
-       Length[cleanPredictions]], 0]
-   ]
-  ]
-
-
-displayOutcomes[result_, rowIndex_ : "Unknown"] := 
- Module[{outcomeProbs, util, prediction, maxProb, agent1, agent2},
-  
-  outcomeProbs =
-   Association[
-    "SQ" -> result["SQ"],
-    "ACQ1" -> result["ACQ1"],
-    "ACQ2" -> result["ACQ2"],
-    "NEGO" -> result["NEGO"],
-    "CAP1" -> result["CAP1"],
-    "CAP2" -> result["CAP2"],
-    "WAR1" -> result["WAR1"],
-    "WAR2" -> result["WAR2"]];
-  
-  util = result["utilities"];
-  agent1 = If[KeyExistsQ[util, "Agent1"], util["Agent1"], util["ccode1"]];
-  agent2 = If[KeyExistsQ[util, "Agent2"], util["Agent2"], util["ccode2"]];
-  
-  (*Find prediction (outcome with highest probability)*)
-  maxProb = Max[Values[outcomeProbs]];
-  prediction = First[Keys[Select[outcomeProbs, # == maxProb &]]];
-  
-  (*Display results*)
-  Print["=== Row ", rowIndex, " Analysis ==="];
-  Print["Dyad: ", agent1, "-", agent2, " (", util["year"], ")"];
-  Print["Ground Truth: ", result["groundtruth"]];
-  Print["Model Prediction: ", prediction];
-  Print["Correct: ", result["groundtruth"] == prediction];
-  Print[""];
-  Print["Outcome Probabilities:"];
-  Print[
-   Grid[
-    Prepend[
-     Table[
-      {outcome,
-       NumberForm[outcomeProbs[outcome], {1, 4}],
-       ToString[NumberForm[100*outcomeProbs[outcome], {3, 1}]] <> "%"},
-      {outcome, Keys[outcomeProbs]}
-      ],
-     {"Outcome", "Probability", "Percentage"}
-     ],
-    Frame -> All,
-    Alignment -> {{Left, Right, Right}},
-    FrameStyle -> Thin]
-   ];
-  
-  Print["Total Probability: ", NumberForm[result["total"], {1, 6}]];
-  Print[""];
-  Print["Key Utilities:"];
-  Print[
-   Grid[
-    {
-     {"Player", "SQ", "ACQ1", "ACQ2", "NEGO", "CAP1", "CAP2", "WAR1", 
-      "WAR2"};
-     {"Player 1", NumberForm[util["U1SQ"], {1, 2}], 
-      NumberForm[util["U1Acq1"], {1, 2}], NumberForm[util["U1Acq2"], {1, 2}], 
-      NumberForm[util["U1Nego"], {1, 2}], NumberForm[util["U1Cap1"], {1, 2}], 
-      NumberForm[util["U1Cap2"], {1, 2}], NumberForm[util["U1War1"], {1, 2}], 
-      NumberForm[util["U1War2"], {1, 2}]},
-     {"Player 2", NumberForm[util["U2War1"], {1, 2}], 
-      NumberForm[util["U2War2"], {1, 2}], NumberForm[util["U2Cap1"], {1, 2}], 
-      NumberForm[util["U2Cap2"], {1, 2}], 
-      ToString[NumberForm[util["U2Acq1"], {1, 2}]] <> "/" <> 
-       ToString[NumberForm[util["U2Acq2"], {1, 2}]], 
-      NumberForm[util["U2Nego"], {1, 2}], NumberForm[util["U2SQ"], {1, 2}]}
-     },
-    
-    Frame -> All,
-    Alignment -> Center,
-    FrameStyle -> Thin
-    ]
-   ];
-  
-  Association[
-   "prediction" -> prediction,
-   "correct" -> result["groundtruth"] == prediction,
-   "probabilities" -> outcomeProbs,
-   "utilities" -> util
-   ]
-  ]
-
 extractPredictionsAndGroundtruth
 
 extractPredictionsAndGroundtruth[results_] := 
- Module[{predictions, groundTruth, outcomes},
-  
+ Module[{predictions, groundTruth, outcomes}, 
   outcomes = {"ACQ1", "ACQ2", "CAP1", "CAP2", "NEGO", "SQ", "WAR1"};
-  predictions =
-   Table[
-    Module[{outcomeProbs, maxVal, maxOutcome},
-     outcomeProbs =
+  predictions = 
+   Table[Module[{outcomeProbs, maxVal, maxOutcomes, maxOutcome, roundedProbs},
+      outcomeProbs = 
       Association[
        "ACQ1" -> 
         If[KeyExistsQ[results[[i]], "ACQ1"] && NumericQ[results[[i]]["ACQ1"]],
-          results[[i]]["ACQ1"], 0],
+          results[[i]]["ACQ1"], 0], 
        "ACQ2" -> 
         If[KeyExistsQ[results[[i]], "ACQ2"] && NumericQ[results[[i]]["ACQ2"]],
-          results[[i]]["ACQ2"], 0],
+          results[[i]]["ACQ2"], 0], 
        "CAP1" -> 
         If[KeyExistsQ[results[[i]], "CAP1"] && NumericQ[results[[i]]["CAP1"]],
-          results[[i]]["CAP1"], 0],
+          results[[i]]["CAP1"], 0], 
        "CAP2" -> 
         If[KeyExistsQ[results[[i]], "CAP2"] && NumericQ[results[[i]]["CAP2"]],
-          results[[i]]["CAP2"], 0],
+          results[[i]]["CAP2"], 0], 
        "NEGO" -> 
         If[KeyExistsQ[results[[i]], "NEGO"] && NumericQ[results[[i]]["NEGO"]],
-          results[[i]]["NEGO"], 0],
-       "SQ" -> 
-        If[KeyExistsQ[results[[i]], "SQ"] && NumericQ[results[[i]]["SQ"]], 
-         results[[i]]["SQ"], 0],
+          results[[i]]["NEGO"], 0], 
+       "SQ" -> If[
+         KeyExistsQ[results[[i]], "SQ"] && NumericQ[results[[i]]["SQ"]], 
+         results[[i]]["SQ"], 0], 
        "WAR1" -> 
         If[KeyExistsQ[results[[i]], "WAR1"] && NumericQ[results[[i]]["WAR1"]],
-          results[[i]]["WAR1"], 0]
-       ];
-     
-     (*Find outcome with maximum probability*)
-     maxVal = Max[Values[outcomeProbs]];
-     maxOutcome = First[Keys[Select[outcomeProbs, # == maxVal &]]];
+          results[[i]]["WAR1"], 0]];
+     (*Find outcome with maximum probability*)(*Round probabilities to 4 \
+decimal places for comparison*)
+     roundedProbs = 
+      Association[# -> Round[outcomeProbs[#], 0.0001] & /@ Keys[outcomeProbs]];
+     maxVal = Max[Values[roundedProbs]];
+     (*Get all outcomes that have the maximum probability (after rounding)*)
+     maxOutcomes = Keys[Select[roundedProbs, # == maxVal &]];
+     (*Randomly select one if there are ties*)
+     maxOutcome = RandomChoice[maxOutcomes];
      maxOutcome], {i, Length[results]}];
-  
   groundTruth = 
    Table[If[KeyExistsQ[results[[i]], "groundtruth"], 
      results[[i]]["groundtruth"], "UNKNOWN"], {i, Length[results]}];
-  Association[
-   "predictions" -> predictions,
-   "groundtruth" -> groundTruth]]
+  Association["predictions" -> predictions, "groundtruth" -> groundTruth]]
 
 calculateAccuracy
 
-(*1. Accuracy Summary*)
 calculateAccuracy[results_] := Module[{predTruth, correct},
   predTruth = extractPredictionsAndGroundtruth[results];
   correct = 
@@ -923,22 +816,60 @@ plotConfusionMatrix[results_, l1_ : 1, l2_ : 1, title_ : "Confusion Matrix"] :=
    FrameStyle -> Thick,
    Dividers -> {{2 -> Thick}, {2 -> Thick}}]]
 
-createSummaryTable
+getFirstNEntries
 
-createSummaryTable[results_] := Module[{predTruth, accuracy, outcomeStats},
-  predTruth = extractPredictionsAndGroundtruth[results];
-  accuracy = calculateAccuracy[results];
-  outcomeStats = 
-   Table[Module[{indices, avgProb}, 
-     indices = Position[predTruth["groundtruth"], outcome] // Flatten;
-     avgProb = 
-      If[Length[indices] > 0, 
-       Mean[Table[results[[i]][outcome], {i, indices}]], 0];
-     {outcome, Length[indices], N[avgProb, 3]}], {outcome, 
-     Union[predTruth["groundtruth"]]}];
-  Grid[Prepend[outcomeStats, {"Outcome", "Count", "Avg Probability"}], 
-   Frame -> All, FrameStyle -> Thin, Alignment -> Center, 
-   Background -> {None, {LightBlue, None}}]]
+getFirstNEntries[resultAllData_, N_Integer] := Module[{extractedEntries},
+  (*Input validation*)
+  If[! ListQ[resultAllData],
+   Print["Error: resultAllData must be a list"];
+   Return[$Failed]
+   ];
+  
+  If[N <= 0,
+   Print["Error: N must be a positive integer"];
+   Return[$Failed]
+   ];
+  
+  If[Length[resultAllData] == 0,
+   Print["Warning: resultAllData is empty"];
+   Return[{}]
+   ];
+  
+  (*Extract only the specified components from each entry*)
+  extractedEntries =
+   Table[Module[{entry, utils},
+     entry = resultAllData[[i]];
+     utils = 
+      If[KeyExistsQ[entry, "utilities"], entry["utilities"], Association[]];
+     
+     Association[
+      "SQ" -> If[KeyExistsQ[entry, "SQ"], Round[entry["SQ"], 0.0001], 0],
+      "ACQ1" -> If[KeyExistsQ[entry, "ACQ1"], Round[entry["ACQ1"], 0.0001], 0],
+      "ACQ2" -> If[KeyExistsQ[entry, "ACQ2"], Round[entry["ACQ2"], 0.0001], 0],
+      "NEGO" -> If[KeyExistsQ[entry, "NEGO"], Round[entry["NEGO"], 0.0001], 0],
+      "CAP1" -> If[KeyExistsQ[entry, "CAP1"], Round[entry["CAP1"], 0.0001], 0],
+      "CAP2" -> If[KeyExistsQ[entry, "CAP2"], Round[entry["CAP2"], 0.0001], 0],
+      "WAR1" -> If[KeyExistsQ[entry, "WAR1"], Round[entry["WAR1"], 0.0001], 0],
+      "WAR2" -> If[KeyExistsQ[entry, "WAR2"], Round[entry["WAR2"], 0.0001], 0],
+      "prediction" -> 
+       If[KeyExistsQ[entry, "prediction"], entry["prediction"], "UNKNOWN"],
+      "groundtruth" -> 
+       If[KeyExistsQ[entry, "groundtruth"], entry["groundtruth"], "UNKNOWN"],
+      "Agent1" -> 
+       If[KeyExistsQ[utils, "Agent1"], utils["Agent1"], "UNKNOWN"],
+      "Agent2" -> 
+       If[KeyExistsQ[utils, "Agent2"], utils["Agent2"], "UNKNOWN"]]
+     ], {i, Min[N, Length[resultAllData]]}
+    ];
+  
+  (*Return extracted entries with informative message*)
+  If[N >= Length[resultAllData],
+   Print["Note: Requested ", N, " entries but only ", Length[resultAllData], 
+    " available. Returning all entries with extracted components."];
+   Return[extractedEntries],
+   Print["Returning first ", N, " entries out of ", Length[resultAllData], 
+    " total entries with extracted components."];
+   Return[extractedEntries]]]
 
 Experiments
 
@@ -950,9 +881,11 @@ rowIndex = 2;
 "/Users/162191/Documents/Github/quantum_international_interaction_game/BN/\
 dataset/balanced_data.csv"; *)
 
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\balanced_data.csv";
+datasetPath =  \
+"/Users/162191/Documents/GitHub/quantum_international_interaction_game/\
+dataset/balanced_data.csv"
+(* "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
+dataset\\balanced_data.csv"; *)
 
 data = loadData[datasetPath];
 
@@ -963,79 +896,15 @@ result = calculateOutcome[data, rowIndex];
 result = calculateOutcome[data, rowIndex];
 displayOutcomes[result, rowIndex];
 
-Non Balanced Dataset
-
-Setting 1: Lamda1 = 1 | Lambda2 = 1
-
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\first_dataset_with_SQ.csv";
-data = loadData[datasetPath];
-
-l1 = 1;
-l2 = 1;
-
-resultAllData = processDataset[data, l1, l2];
-
-accuracy = calculateAccuracy[resultAllData]
-
-plotConfusionMatrix[resultAllData, l1, l2, "Signorino Confusion Matrix"]
-
-Setting 2: Lamda1 = 0.5 | Lambda2 = 0.5
-
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\first_dataset_with_SQ.csv";
-data = loadData[datasetPath];
-
-l1 = 0.5;
-l2 = 0.5;
-
-resultAllData = processDataset[data, l1, l2];
-
-accuracy = calculateAccuracy[resultAllData]
-
-plotConfusionMatrix[resultAllData, l1, l2, "Signorino Confusion Matrix"]
-
-Setting 3: Lamda1 = 10 | Lambda2 = 2
-
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\first_dataset_with_SQ.csv";
-data = loadData[datasetPath];
-
-l1 = 2;
-l2 = 2;
-
-resultAllData = processDataset[data, l1, l2];
-
-accuracy = calculateAccuracy[resultAllData]
-
-plotConfusionMatrix[resultAllData, l1, l2, "Signorino Confusion Matrix"]
-
-Setting 4: Lamda1 = 0.1 | Lambda2 = 0.1
-
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\first_dataset_with_SQ.csv";
-data = loadData[datasetPath];
-
-l1 = 0.1;
-l2 = 0.1;
-
-resultAllData = processDataset[data, l1, l2];
-
-accuracy = calculateAccuracy[resultAllData]
-
-plotConfusionMatrix[resultAllData, l1, l2, "Signorino Confusion Matrix"]
-
 Balanced Dataset
 
 Setting 1: Lamda1 = 1 | Lambda2 = 1
 
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\balanced_data.csv";
+datasetPath = \
+"/Users/162191/Documents/GitHub/quantum_international_interaction_game/\
+dataset/balanced_data.csv"
+(* "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
+dataset\\balanced_data.csv"; *)
 data = loadData[datasetPath];
 
 l1 = 1;
@@ -1043,53 +912,7 @@ l2 = 1;
 
 resultAllData = processDataset[data, l1, l2];
 
-accuracy = calculateAccuracy[resultAllData]
-
-plotConfusionMatrix[resultAllData, l1, l2, "Signorino Confusion Matrix"]
-
-Setting 2: Lamda1 = 0.5 | Lambda2 = 0.5
-
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\balanced_data.csv";
-data = loadData[datasetPath];
-
-l1 = 0.5;
-l2 = 0.5;
-
-resultAllData = processDataset[data, l1, l2];
-
-accuracy = calculateAccuracy[resultAllData]
-
-plotConfusionMatrix[resultAllData, l1, l2, "Signorino Confusion Matrix"]
-
-Setting 3: Lamda1 = 2 | Lambda2 = 2
-
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\balanced_data.csv";
-data = loadData[datasetPath];
-
-l1 = 2;
-l2 = 2;
-
-resultAllData = processDataset[data, l1, l2];
-
-accuracy = calculateAccuracy[resultAllData]
-
-plotConfusionMatrix[resultAllData, l1, l2, "Signorino Confusion Matrix"]
-
-Setting 4: Lamda1 = 0.1 | Lambda2 = 0.1
-
-datasetPath = 
-  "D:\\home\\Documents\\Github\\quantum_international_interaction_game\\BN\\\
-dataset\\balanced_data.csv";
-data = loadData[datasetPath];
-
-l1 = 0.1;
-l2 = 0.1;
-
-resultAllData = processDataset[data, l1, l2];
+samplePredictions = getFirstNEntries[resultAllData, 3]
 
 accuracy = calculateAccuracy[resultAllData]
 
